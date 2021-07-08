@@ -2,6 +2,8 @@ const {Collection, Client, Discord} = require('discord.js');
 require('discord-reply');
 const fs = require('fs');
 
+const keepAlive = require("./server");
+
 const client = new Client({
     disableEveryone: true
 });
@@ -235,4 +237,5 @@ client.sendAddMsg = (message) => {
     }
 }
 
+keepAlive();
 client.login(token);
