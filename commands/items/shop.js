@@ -13,12 +13,13 @@ function read_prop(obj, prop) {
 module.exports = {
     name : 'shop',
     cooldown: 3,
-    category : 'economy',
+    category : 'items',
+    usage: `shop {item}`,
     description : `Returns A List Of Items Available To Be Bought On The Shop!`,
     run: async (client, message, args) => {
 
         const emoji = await client.dgemoji()
-        const prefix = await client.prefix()
+        const prefix = await client.prefix(message)
         const bal = await client.bal(message.author.id)
 
         if(bal >= 0 && bal !== false){

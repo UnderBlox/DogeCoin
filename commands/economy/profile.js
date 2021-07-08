@@ -10,6 +10,7 @@ module.exports = {
     cooldown: 1,
     aliases : ['b', 'bal', 'balance', 'pro', 'p', 'rank'],
     category : 'economy',
+    usage: `profile {@user}`,
     description : `Returns The User's Balance!`,
     run: async (client, message, args) => {
         const member = message.mentions.members.first() || message.member;

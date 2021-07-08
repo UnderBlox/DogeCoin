@@ -13,7 +13,8 @@ module.exports = {
     name : 'inventory',
     cooldown: 1,
     aliases : ['inv'],
-    category : 'economy',
+    category : 'items',
+    usage: `inventory {@user}`,
     description : `Returns A List Of Items Inside The Player's Inventory!`,
     run: async (client, message, args) => {
         

@@ -10,7 +10,7 @@ module.exports = {
     category : 'economy',
     description : `Start Your Adventure On Being The Richest DogeCoin Owner!`,
     run: async (client, message, args) => {
-        const prefix = await client.prefix()
+        const prefix = await client.prefix(message)
         const data = await profileSchema.findOne({ User: message.author.id });
         if(data){
             const emoji = await client.dgemoji()

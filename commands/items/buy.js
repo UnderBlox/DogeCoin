@@ -8,7 +8,8 @@ const items = require("../../items/items");
 module.exports = {
     name : 'buy',
     cooldown: 3,
-    category : 'economy',
+    category : 'items',
+    usage: `buy {item}`,
     description : `Buy Items From The Shop!`,
     run: async (client, message, args) => {
         const emoji = await client.dgemoji()

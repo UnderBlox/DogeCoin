@@ -49,7 +49,7 @@ module.exports = {
     category : 'economy',
     description : `Check What Command Is / Isn't On Cooldown!`,
     run: async (client, message, args) => {
-        const prefix = await client.prefix()
+        const prefix = await client.prefix(message)
 
         const data = await cooldownsSchema.findOne({ User: message.author.id });
 

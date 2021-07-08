@@ -4,6 +4,7 @@
   "description": "",
   "main": "main.js",
   "dependencies": {
+    "@reconlx/discord.js": "^1.1.101",
     "ascii-table": "0.0.9",
     "discord-reply": "^0.1.2",
     "discord.js": "^12.5.3",

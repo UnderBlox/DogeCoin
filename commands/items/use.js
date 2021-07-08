@@ -14,7 +14,8 @@ const RandomNum = (min, max) => {
 module.exports = {
     name : 'use',
     cooldown: 1,
-    category : 'economy',
+    category : 'items',
+    usage: `use {item}`,
     description : `Use Items In Your Inventory!`,
     run: async (client, message, args) => {
         if(!args[0]) return message.lineReply(`Please Include A Valid Item To Use!`)

@@ -5,6 +5,8 @@ const fs = require('fs');
 const keepAlive = require("./server");
 
 const client = new Client({
+    shards: "auto",
+    restTimeOffset: 0,
     disableEveryone: true
 });
 
@@ -12,6 +14,7 @@ const profileSchema = require("./models/profile");
 const skillsSchema = require("./models/skills");
 const cooldownSchema = require("./models/cooldowns");
 const invSchema = require("./models/inventory");
+const prefixSchema = require('./models/prefix');
 
 const mongoose = require('mongoose');
 
@@ -43,7 +46,18 @@ module.exports = client;
 
 //functions
 client.prefix = async function(message) {
-    return prefix;
+    let custom;
+
+    const data = await prefixSchema.findOne({ Guild : message.guild.id })
+        .catch(err => console.log(err))
+    
+    if(data) {
+        custom = data.Prefix;
+    } else {
+        custom = prefix;
+    }
+
+    return custom;
 };
 
 client.dgemoji = async function() {
