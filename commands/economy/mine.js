@@ -46,11 +46,7 @@ module.exports = {
 
                     const randomWorkExp = RandomNum(3, 6)
                     const randomMiningExp = RandomNum(1, 3)
-                            
-                    await client.add(message.author.id, addAmount);
-                    await client.addExp(message, randomWorkExp)
-                    await client.addExp(message, randomMiningExp, "Mine")
-        
+
                     const embed = new MessageEmbed()
                     .setColor('#fcdb03')
                     .addFields(
@@ -61,6 +57,10 @@ module.exports = {
                     .setFooter('📅');
         
                     message.channel.send(embed);
+                            
+                    await client.add(message.author.id, addAmount);
+                    await client.addExp(message, randomWorkExp)
+                    await client.addExp(message, randomMiningExp, "Mine")
 
                     client.sendAddMsg(message)
                 }
