@@ -4,7 +4,6 @@ const profileSchema = require("../../models/profile");
 const invSchema = require("../../models/inventory");
 
 const items = require("../../items/items");
-const usableItems = require("../../items/usableItems");
 
 function read_prop(obj, prop) {
     return obj[prop];

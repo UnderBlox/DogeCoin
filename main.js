@@ -24,7 +24,6 @@ mongoose.set('useFindAndModify', false);
 const additionalMessages = require("./details/additionalMsg");
 
 const items = require("./items/items");
-const usableitems = require("./items/usableitems");
 
 const config = require('./config.json');
 const prefix = config.prefix;
