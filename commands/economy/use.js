@@ -4,7 +4,7 @@ const profileSchema = require("../../models/profile");
 const invSchema = require("../../models/inventory");
 
 const items = require("../../items/items");
-const usableItems = require("../../items/usableItems");
+const usableItems = require("../../items/usableitems");
 
 const RandomNum = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
