@@ -21,6 +21,7 @@ module.exports = {
                     Level: 1,
                     Exp: 0,
                     DailyStreak: 0,
+                    Tutorial: "Done",
                 }).save();
 
                 new skillsSchema({

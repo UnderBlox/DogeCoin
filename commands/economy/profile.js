@@ -19,7 +19,7 @@ module.exports = {
         const emoji = await client.dgemoji()
 
         if(bal >= 0 && bal !== false){
-            profileSchema.findOne({ User: message.author.id }, async(err, data) => {
+            profileSchema.findOne({ User: member.id }, async(err, data) => {
                 if(data){
                     const skillsData = await skillsSchema.findOne({ User: message.author.id });
 

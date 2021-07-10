@@ -10,5 +10,6 @@ module.exports = model(
         Level: Number,
         Exp: Number,
         DailyStreak: Number,
+        Tutorial: String,
     })
 );
