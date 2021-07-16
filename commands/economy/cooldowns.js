@@ -78,7 +78,7 @@ module.exports = {
             { name: `😋 Hourly`, value: `${hourlyCd} \n`, inline: true},
             { name: `😎 Daily`, value: `${dailyCd} \n`, inline: true},
         )
-        .addField('᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼', '<:DogeGod:860687685177573436> **Doge God:** \n "Patience Is The Key To Being The Best."')
+        .addField('᲼', '<:DogeGod:860687685177573436> **Doge God:** \n "Patience Is The Key To Being The Best."')
         .setTimestamp()
         .setFooter('📅');
 

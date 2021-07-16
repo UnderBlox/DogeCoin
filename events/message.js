@@ -67,7 +67,7 @@ client.on('message', async message =>{
         const args = message.content.slice(p.length).trim().split(/ +/g);
         const cmd = args.shift().toLowerCase();
     
-        if(cmd.length == 0 ) return;
+        if(cmd.length == 0) return;
     
         let command = client.commands.get(cmd)
     

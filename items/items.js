@@ -12,4 +12,17 @@ module.exports = [
         SellPrice: 2500,
         Usable: true,
     },
+    {
+        Name: "Mystery Gift",
+        ShowName: "📦 Mystery Gift",
+        InfoImage: `https://i.imgur.com/m9aDic8.png`,
+        Description: "A Gift From The Doge God Whenever You Hit Level 3.",
+        IDs: ['mysterygift'],
+        InShop: false,
+        Buyable: false,
+        BuyPrice: false,
+        Sellable: false,
+        SellPrice: false,
+        Usable: true,
+    },
 ]

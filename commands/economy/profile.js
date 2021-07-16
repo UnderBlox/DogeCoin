@@ -21,7 +21,7 @@ module.exports = {
         if(bal >= 0 && bal !== false){
             profileSchema.findOne({ User: member.id }, async(err, data) => {
                 if(data){
-                    const skillsData = await skillsSchema.findOne({ User: message.author.id });
+                    const skillsData = await skillsSchema.findOne({ User: member.id });
 
                     const boxes = Math.floor((data.Exp/(200 * ((1/2) * data.Level))) * 10)
                     const link = "https://youtu.be/rGCxtPLzwO8"

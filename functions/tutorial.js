@@ -25,8 +25,10 @@ const phase = async (message, data, prefix) => {
             if(message.content == `${prefix}profile`){
                 profile.run(client, message)
 
-                message.lineReply(`**Good Job! Now, Income. You Can Earn Money By Using \`${prefix}work\`, \`${prefix}farm\`, \`${prefix}fish\`, \`${prefix}mine\`, etc \n\nTry Using \`${prefix}work\`! (Tip: You Can See A List Of Commands That Can Get You Money By Using The \`${prefix}help income\` Command!) \nYou Can End The Tutorial By Saying \`end\`!**`)
-                
+                setTimeout(async function(){ 
+                    message.lineReply(`**Good Job! Now, Income. You Can Earn Money By Using \`${prefix}work\`, \`${prefix}farm\`, \`${prefix}fish\`, \`${prefix}mine\`, etc \n\nTry Using \`${prefix}work\`! (Tip: You Can See A List Of Commands That Can Get You Money By Using The \`${prefix}help income\` Command!) \nYou Can End The Tutorial By Saying \`end\`!**`)
+                }, 2500)
+
                 data.Tutorial = "2"
                 await data.save();
 
@@ -36,11 +38,13 @@ const phase = async (message, data, prefix) => {
                 if(message.content == `${prefix}work`){
                     work.run(client, message)
     
-                    message.lineReply(`**Congratulations! You Finished The Tutorial! You Can Redo The Tutorial At Any Time! If You Still Need Help You Can Use The \`${prefix}help\` Command! \n\n(Creator: I know the tutorial is short, its still work in progress 😉)**`)
-                    
+                    setTimeout(async function(){ 
+                        message.lineReply(`**Congratulations! You Finished The Tutorial! You Can Redo The Tutorial At Any Time! If You Still Need Help You Can Use The \`${prefix}help\` Command! \n\n(Creator: I know the tutorial is short, its still work in progress 😉)**`)
+                    }, 2500)
+                        
                     data.Tutorial = "Done"
                     await data.save();
-    
+
                 } else wrongMsg(message, "work", prefix)
             }
         }

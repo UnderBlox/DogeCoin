@@ -6,6 +6,8 @@ const invSchema = require("../../models/inventory");
 const items = require("../../items/items");
 const usableItems = require("../../items/usableitems");
 
+const usableitemrewards = require("../../functions/usableitemrewards");
+
 const RandomNum = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
@@ -55,6 +57,10 @@ module.exports = {
                     .setFooter('📅');
     
                     message.channel.send(embed)
+                } else{
+                    if(usableitem.RewardType == "custom"){
+                        usableitemrewards.run(client, message, usableitem.IDs[0], useAmount)
+                    }
                 }
             } else {
                 await client.rmvCooldown(message.author.id, "daily", 72000);

@@ -3,6 +3,7 @@ require('discord-reply');
 const fs = require('fs');
 
 const keepAlive = require("./server");
+const schedule = require("./schedule");
 
 const client = new Client({
     shards: "auto",
@@ -30,6 +31,8 @@ const additionalMessages = require("./details/additionalMsg");
 
 const items = require("./items/items");
 
+const levelrewards = require('./functions/levelrewards');
+
 const config = require('./config.json');
 const prefix = config.prefix;
 const token = config.token;
@@ -43,6 +46,8 @@ module.exports = client;
 ["command"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
+
+schedule.run(client)
 
 //functions
 client.prefix = async function(message) {
@@ -111,6 +116,8 @@ client.addExp = async (message, exp, skill) => {
                     }
     
                     await data.save();
+
+                    levelrewards.run(client, message, data.Level)
     
                     message.lineReply(`<:Report:860322443477778432> **Breaking News! Doge Coin Prices Has Increased By ${data.Level}%!** <a:DogeBall:860321981777969183>`)
                 }
@@ -136,6 +143,8 @@ client.addExp = async (message, exp, skill) => {
                     data[Multi] = data[Multi] + data[Level]
     
                     await data.save();
+
+                    levelrewards.run(client, message, data.Level)
     
                     message.lineReply(`<:Report:860322443477778432> **Breaking News! ${skill}(ing) Doge Coins Income Has Increased By ${data[Level]}%!** <a:DogeBall:860321981777969183>`)
                 }
@@ -244,8 +253,7 @@ client.rmv = async (id, coins) => {
 
 client.sendAddMsg = (message) => {
     const ranNum = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
-    const ranNum2 = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
-    if(ranNum == ranNum2){
+    if(ranNum == 10){
         const msg = additionalMessages[Math.floor(Math.random() * additionalMessages.length)];
         message.reply(`**${msg}**`);
     }

@@ -111,6 +111,8 @@ module.exports = {
                     showName = `🎈 Items`
                 } else if(cName == "utility"){
                   showName = `🔧 Utility`
+                } else if(cName == "computer"){
+                  showName = `💻 Computer`
                 }
 
                 const embed = new MessageEmbed()
@@ -133,6 +135,7 @@ module.exports = {
                         { name: `🤔 Info`, value: `\`${prefix}help info\``, inline: true},
                         { name: `🎈 Items`, value: `\`${prefix}help items\``, inline: true},
                         { name: `🔧 Utility`, value: `\`${prefix}help utility\``, inline: true},
+                        { name: `💻 Computer`, value: `\`${prefix}help computer\``, inline: true},
                     )
                     .setTimestamp()
                     .setFooter('📅');
@@ -150,6 +153,7 @@ module.exports = {
                 { name: `🤔 Info`, value: `\`${prefix}help info\``, inline: true},
                 { name: `🎈 Items`, value: `\`${prefix}help items\``, inline: true},
                 { name: `🔧 Utility`, value: `\`${prefix}help utility\``, inline: true},
+                { name: `💻 Computer`, value: `\`${prefix}help computer\``, inline: true},
             )
             .setTimestamp()
             .setFooter('📅');
