@@ -21,7 +21,7 @@ module.exports = {
 
                 Cooler: 1,
                 Graphics: 1,
-                BankLevel: 1,
+                Hardware: 1,
             }).save();
 
             const embed = new MessageEmbed()

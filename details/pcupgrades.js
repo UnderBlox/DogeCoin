@@ -4,7 +4,7 @@ module.exports = [
         UpgradeName: "Cooler",
         DataUpgrade: "OverheatChance",
         AddOrRemove: "Remove",
-        Amount: "1",
+        Amount: 1,
         Cost: 250
     },
     {
@@ -12,15 +12,15 @@ module.exports = [
         UpgradeName: "Graphics",
         DataUpgrade: "IncomePerHour",
         AddOrRemove: "Add",
-        Amount: "25",
+        Amount: 25,
         Cost: 500
     },
     {
         Upgrade: "bank",
-        UpgradeName: "BankLevel",
+        UpgradeName: "Hardware",
         DataUpgrade: "MaxBank",
         AddOrRemove: "Add",
-        Amount: "250",
+        Amount: 250,
         Cost: 150
     }
 ]

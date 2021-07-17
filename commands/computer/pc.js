@@ -21,7 +21,7 @@ const pcStats = async (message, member, client, args) => {
                 { name: `💻 Computer`, value: `**Bank: ${emoji} ${data.Bank} / ${data.MaxBank}** \n **Income Per Hour: ${emoji} ${data.IncomePerHour}** \n\n **Overheated: ${data.Overheated}** \n **Overheat Chance: ${data.OverheatChance}%**`, inline: true},
                 { name: `🧊 Cooler:`, value: `Level ${data.Cooler}`},
                 { name: `😎 Graphics:`, value: `Level ${data.Graphics}`},
-                { name: `🏦 Bank:`, value: `Level ${data.BankLevel}`},
+                { name: `🏦 Hardware:`, value: `Level ${data.Hardware}`},
             )
             .setTimestamp()
             .setFooter('📅');
@@ -43,7 +43,7 @@ const pcUps = async (message, member, client, args) => {
             .addFields(
                 { name: `🧊 Cooler \`Lvl ${data.Cooler}\``, value: `Reduce The Chances Of Your Computer Overheating. \n Cost: **${parseInt(upgradesInfo.find(key => key.Upgrade == "cooler").Cost * data.Cooler)} ${emoji} **\n \`${prefix}pc upgrade cooler\` \n\u200B`},
                 { name: `😎 Graphics \`Lvl ${data.Graphics}\``, value: `Increases Your Income Per Hour But Increases The Chance Of Your Computer Overheating. \n Cost: **${parseInt(upgradesInfo.find(key => key.Upgrade == "graphics").Cost * data.Graphics)} ${emoji}** \n \`${prefix}pc upgrade graphics\` \n\u200B`},
-                { name: `🏦 Bank \`Lvl ${data.BankLevel}\``, value: `Increases Your Computer's Bank Space. \n Cost: **${parseInt(upgradesInfo.find(key => key.Upgrade == "bank").Cost * data.BankLevel)} ${emoji}** \n \`${prefix}pc upgrade bank\``},
+                { name: `🏦 Hardware \`Lvl ${data.Hardware}\``, value: `Increases Your Computer's Bank Space. \n Cost: **${parseInt(upgradesInfo.find(key => key.Upgrade == "bank").Cost * data.Hardware)} ${emoji}** \n \`${prefix}pc upgrade bank\``},
             )
             .setTimestamp()
             .setFooter('📅');
@@ -68,8 +68,7 @@ const pcUp = async (message, member, client, args, bal) => {
     computerSchema.findOne({ User: message.author.id }, async(err, data) => {
         if(data){
             if(upgrade){   
-                upgrade.toLowerCase()
-                const upgrd = upgradesInfo.find(key => upgrade && key.Upgrade == upgrade);
+                const upgrd = upgradesInfo.find(key => upgrade.toLowerCase() && key.Upgrade == upgrade.toLowerCase());
                 if(upgrd){
                     if(upgrd.Upgrade == "cooler"){
                         if(data.OverheatChance == 1){
@@ -81,18 +80,35 @@ const pcUp = async (message, member, client, args, bal) => {
                     const cost = parseInt((upgrd.Cost * dataUpgrade) * amount)
                     if(bal >= cost){
                         await client.rmv(message.author.id, cost);
+
+                        if(upgrd.Upgrade == "cooler"){
+                            data["OverheatChance"] = data["OverheatChance"] - amount;
+                            if(data["OverheatChance"] <= 0){
+                                return message.lineReplyNoMention(`You Cannot Upgrade Your Cooler Any More, Its Already Maxed Out!`);
+                            } else {
+                                await data.save();
+                            }
+                        } else {
+                            if(upgrd.Upgrade == "graphics"){
+                                data["OverheatChance"] = data["OverheatChance"] + amount;
+                                if(data["OverheatChance"] >= 100){
+                                    return message.lineReplyNoMention(`You Cannot Upgrade Your Graphics Any More Or Else It Will Overheat Foorever, Please Upgrade Your Cooler More!`);
+                                } else {
+                                    data["IncomePerHour"] = data["IncomePerHour"] + parseInt(upgrd.Amount * amount);
+                                    await data.save();
+                                }
+                            } else {
+                                if(upgrd.Upgrade == "bank"){
+                                    data["MaxBank"] = data["MaxBank"] + parseInt(upgrd.Amount * amount);
+                                    await data.save(); 
+                                } 
+                            }
+                        }
+
                         data[upgrd.UpgradeName] = data[upgrd.UpgradeName] + amount;
                         await data.save();
 
-                        if(upgrd.AddOrRemove == "Add"){
-                            data[upgrd.DataUpgrade] = data[upgrd.DataUpgrade] + parseInt(upgrd.Amount * amount);
-                            await data.save(); 
-                        } else {
-                            data[upgrd.DataUpgrade] = data[upgrd.DataUpgrade] - parseInt(upgrd.Amount * amount);
-                            await data.save();
-                        }
-
-                        message.lineReply(`**You Upgraded Your ${upgrd.Upgrade} To Level ${data[upgrd.UpgradeName]}!**`);
+                        message.lineReply(`**You Upgraded Your ${upgrd.Upgrade} To Level ${data[upgrd.UpgradeName]} For ${emoji} ${cost}!**`);
 
                     } else return message.lineReplyNoMention(`You Are To Broke To Buy That Upgrade Lmao`);
                 } else return message.lineReplyNoMention(`Please Provide A Valid Upgrade, You Can Do \`${prefix}pc upgrades\` To See A List Of Upgrades!`);
@@ -125,6 +141,8 @@ module.exports = {
                 } else {
                     if(upgradeAliases.find(e => e == args[0].toLowerCase())){
                         pcUp(message, member, client, args, bal)
+                    } else {
+                        pcStats(message, member, client, args)
                     }
                 }
             }

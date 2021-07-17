@@ -14,6 +14,6 @@ module.exports = model(
 
         Cooler: Number,
         Graphics: Number,
-        BankLevel: Number,
+        Hardware: Number,
     })
 );
